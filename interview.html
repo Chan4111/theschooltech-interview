@@ -1,1 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheSchoolTech — Interview Preparation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #2563eb; --green: #059669; --orange: #ea580c;
+  --red: #dc2626; --purple: #7c3aed; --yellow: #d97706;
+  --dark: #0f172a; --card: #1e293b; --border: #334155;
+  --text: #e2e8f0; --muted: #94a3b8; --white: #fff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; }
 
+/* Nav */
+.topnav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15,23,42,.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: .8rem 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.topnav a {
+  color: var(--muted); text-decoration: none; font-size: .78rem;
+  font-weight: 500; padding: .3rem .7rem; border-radius: 6px; transition: .15s;
+}
+.topnav a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+.brand { font-weight: 700; color: var(--white); font-size: .95rem; margin-right: .5rem; }
+
+/* Layout */
+.container { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* Section */
+.part {
+  margin-bottom: 3.5rem;
+  border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+}
+.part-header {
+  padding: 1.2rem 1.8rem;
+  display: flex; align-items: center; gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.part-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+  padding: .2rem .6rem; border-radius: 6px;
+  background: rgba(37,99,235,.2); color: #93c5fd;
+}
+.part-title { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+.part-body { padding: 1.5rem 1.8rem; }
+
+/* Q&A Card */
+.qa {
+  margin-bottom: 1.5rem; padding: 1.2rem 1.4rem;
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--border); border-radius: 12px;
+  transition: border-color .15s;
+}
+.qa:hover { border-color: rgba(37,99,235,.4); }
+.q {
+  font-weight: 600; color: var(--white); margin-bottom: .7rem;
+  font-size: .95rem; cursor: pointer;
+  display: flex; align-items: flex-start; gap: .6rem;
+}
+.q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem; color: var(--blue); min-width: 28px;
+  padding-top: .15rem; font-weight: 600;
+}
+.answer { display: none; margin-top: .5rem; }
+.answer.open { display: block; }
+.answer-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: .4rem;
+  margin-top: .8rem;
+}
+.ans-main { color: var(--muted); font-size: .88rem; line-height: 1.7; }
+.proj-label { color: var(--green); }
+.follow-label { color: var(--orange); }
+
+code, .code-block {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0,0,0,.4); border-radius: 6px;
+  font-size: .82rem; color: #7dd3fc;
+}
+code { padding: .1rem .4rem; }
+.code-block {
+  display: block; padding: .9rem 1.1rem; margin: .6rem 0;
+  border: 1px solid rgba(125,211,252,.1); overflow-x: auto;
+  white-space: pre;
+}
+
+/* Badges */
+.badge {
+  display: inline-block; font-size: .65rem; font-weight: 700;
+  padding: .15rem .55rem; border-radius: 20px; margin-left: .4rem;
+  letter-spacing: .05em; text-transform: uppercase; vertical-align: middle;
+}
+.fire { background: rgba(220,38,38,.2); color: #fca5a5; border: 1px solid rgba(220,38,38,.3); }
+.star { background: rgba(217,119,6,.2); color: #fde68a; border: 1px solid rgba(217,119,6,.3); }
+.good { background: rgba(5,150,105,.2); color: #6ee7b7; border: 1px solid rgba(5,150,105,.3); }
+
+/* Rapid fire */
+.rf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.rf-item {
+  padding: .7rem 1rem; background: rgba(255,255,255,.02);
+  border: 1px solid var(--border); border-radius: 8px; font-size: .82rem;
+}
+.rf-q { color: var(--white); font-weight: 500; margin-bottom: .2rem; }
+.rf-a { color: var(--muted); font-size: .78rem; }
+
+/* Top 100 */
+.top-item {
+  display: flex; align-items: flex-start; gap: .8rem;
+  padding: .7rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: .88rem;
+}
+.top-item:last-child { border-bottom: none; }
+.top-rank { font-family: 'JetBrains Mono', monospace; color: var(--muted); min-width: 28px; font-size: .75rem; }
+
+/* Hero */
+.hero { text-align: center; padding: 3rem 1.5rem 2rem; }
+.hero h1 { font-size: 2rem; font-weight: 800; color: var(--white); margin-bottom: .5rem; }
+.hero p { color: var(--muted); font-size: .95rem; }
+.hero-badges { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+.h-badge { padding: .3rem .9rem; border-radius: 30px; font-size: .75rem; font-weight: 600; }
+.hb1 { background: rgba(37,99,235,.15); color: #93c5fd; border: 1px solid rgba(37,99,235,.3); }
+.hb2 { background: rgba(5,150,105,.15); color: #6ee7b7; border: 1px solid rgba(5,150,105,.3); }
+.hb3 { background: rgba(124,58,237,.15); color: #c4b5fd; border: 1px solid rgba(124,58,237,.3); }
+
+/* Tip box */
+.tip {
+  padding: .9rem 1.1rem; border-radius: 10px; margin-bottom: 1rem;
+  font-size: .85rem; line-height: 1.6;
+}
+.tip-blue { background: rgba(37,99,235,.08); border: 1px solid rgba(37,99,235,.25); color: #93c5fd; }
+.tip-green { background: rgba(5,150,105,.08); border: 1px solid rgba(5,150,105,.25); color: #6ee7b7; }
+.tip-orange { background: rgba(234,88,12,.08); border: 1px solid rgba(234,88,12,.25); color: #fdba74; }
+
+@media (max-width: 640px) {
+  .rf-grid { grid-template-columns: 1fr; }
+  .topnav { padding: .7rem 1rem; }
+  .part-body { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">📚 TheSchoolTech Interview Prep</span>
+  <a href="#p1">Project</a>
+  <a href="#p2">Explain</a>
+  <a href="#p3">PHP</a>
+  <a href="#p4">OOP</a>
+  <a href="#p5">Laravel</a>
+  <a href="#p6">MySQL</a>
+  <a href="#p7">Razorpay</a>
+  <a href="#p8">API</a>
+  <a href="#p9">Security</a>
+  <a href="#p10">Frontend</a>
+  <a href="#p11">Scenarios</a>
+  <a href="#p12">Tricky</a>
+  <a href="#p13">Resume</a>
+  <a href="#p14">RapidFire</a>
+  <a href="#p15">Top100</a>
+</nav>
+
+<div class="hero">
+  <h1>TheSchoolTech — Interview Preparation</h1>
+  <p>Complete guide for PHP / Laravel Full Stack Developer Interview</p>
+  <div class="hero-badges">
+    <span class="h-badge hb1">PHP 8.3</span>
+    <span class="h-badge hb1">Laravel 13</span>
+    <span class="h-badge hb2">MySQL</span>
+    <span class="h-badge hb2">Razorpay</span>
+    <span class="h-badge hb3">Bootstrap 5</span>
+    <span class="h-badge hb3">Multi-Role Auth</span>
+  </div>
+  <p style="margin-top:1rem;font-size:.8rem;color:#475569;">Click any question to reveal the answer ↓</p>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════ PART 1 ═══ -->
+<div class="part" id="p1">
+  <div class="part-header">
+    <span class="part-num">PART 01</span>
+    <span class="part-title">Project-Based Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is TheSchoolTech? <span class="badge fire">🔥 Must Know</span></div>
+    <div class="answer">
+      <div class="answer-label ans-main" style="color:var(--blue)">Interview Answer</div>
+      <div class="ans-main">TheSchoolTech is a full-stack web platform built with Laravel that connects private schools with verified computer trainers. School principals can browse trainer profiles, book them for 1, 2, or 3 months, and pay securely online via Razorpay. Trainers can register, showcase their skills with demo videos, and manage their bookings.</div>
+      <div class="answer-label proj-label">TheSchoolTech Example</div>
+      <div class="ans-main">The platform has 3 user roles — Admin, School Principal, and Trainer — each with their own dashboard and access controls implemented via custom RoleMiddleware.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What problem does TheSchoolTech solve? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Many private schools in India, especially in UP and Bihar, don't have dedicated computer teachers. Students miss out on modern skills like AI, Python, and MS Office. TheSchoolTech solves this by providing a marketplace where schools can hire qualified trainers on short-term contracts without the burden of a permanent salary.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What are the main modules of the system? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        1. <strong>Authentication Module</strong> — Register, Login, Role-based access<br>
+        2. <strong>Trainer Module</strong> — Profile, photo/video upload, subject selection<br>
+        3. <strong>School Module</strong> — Search, filter trainers, manage profile<br>
+        4. <strong>Booking Module</strong> — Create, track, cancel bookings<br>
+        5. <strong>Payment Module</strong> — Razorpay integration, order creation, verification<br>
+        6. <strong>Admin Module</strong> — Approve trainers, monitor bookings, manage subjects<br>
+        7. <strong>Review Module</strong> — Rating and feedback after completed training<br>
+        8. <strong>Email Module</strong> — Notifications via Laravel Mailable
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What technologies did you use and why? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>Laravel 13</strong> — Rapid development, built-in auth, Eloquent ORM, Blade templating<br>
+        <strong>PHP 8.3</strong> — Server-side language, latest features like named arguments, enums<br>
+        <strong>MySQL</strong> — Relational database, perfect for structured school/trainer/booking data<br>
+        <strong>Bootstrap 5</strong> — Responsive UI quickly without writing CSS from scratch<br>
+        <strong>Razorpay</strong> — Indian payment gateway, supports UPI, cards, net banking<br>
+        <strong>Hostinger</strong> — Deployment platform for PHP applications
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> Explain the complete database structure.</div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>users</strong> — id, name, email, password, role (admin/school/trainer), phone, city, is_active<br>
+        <strong>trainer_profiles</strong> — user_id (FK), bio, qualification, experience_years, rate_1month/2month/3month, photo, demo_video, youtube_link, teaching_subjects (JSON), skills (JSON), approval_status<br>
+        <strong>school_profiles</strong> — user_id (FK), school_name, principal_name, address, board, student_count<br>
+        <strong>subjects</strong> — name, category, icon, color<br>
+        <strong>bookings</strong> — school_id (FK), trainer_id (FK), duration_months, start_date, end_date, status, total_amount, subjects (JSON), payment_status, payment_id<br>
+        <strong>reviews</strong> — booking_id (FK), school_id, trainer_id, rating, comment
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> How does the booking flow work end to end? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        1. School searches trainers, filters by subject/city/rate<br>
+        2. School clicks "Book Now" on trainer profile<br>
+        3. School fills booking form — duration (1/2/3 months), start date, subjects<br>
+        4. Booking saved with status = <code>pending</code><br>
+        5. Trainer receives email notification<br>
+        6. Trainer accepts → status = <code>accepted</code><br>
+        7. School sees "Pay Now" button, completes Razorpay payment<br>
+        8. Razorpay signature verified server-side → status = <code>active</code><br>
+        9. Training happens (1-3 months)<br>
+        10. Laravel Scheduler auto-sets status = <code>completed</code> after end_date<br>
+        11. School can leave review/rating
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> How does trainer approval work?</div>
+    <div class="answer">
+      <div class="ans-main">When a trainer registers, their profile is saved with <code>approval_status = 'pending'</code>. Admin sees pending trainers in their dashboard. Admin can Approve or Reject. Only approved trainers appear in the public trainer listing. When approved, trainer receives an email notification via <code>TrainerApprovedMail</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> How is role-based access implemented? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">A custom <code>RoleMiddleware</code> checks <code>Auth::user()->role</code> against allowed roles. Routes are grouped with this middleware:</div>
+      <div class="code-block">Route::middleware(['auth', 'role:school'])->prefix('school')...</div>
+      <div class="ans-main">The middleware is registered in <code>bootstrap/app.php</code> using <code>$middleware->alias(['role' => RoleMiddleware::class])</code>. If the user's role doesn't match, a 403 is returned.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q9</span> How did you handle file uploads (photo and video)?</div>
+    <div class="answer">
+      <div class="ans-main">Files are uploaded via multipart form. In the controller, <code>$request->hasFile('photo')</code> checks if a file exists, then <code>$file->store('trainers/photos', 'public')</code> saves it. Old files are deleted using <code>Storage::disk('public')->delete($oldPath)</code>. For videos, both direct MP4 upload and YouTube URL embed are supported. YouTube links are parsed with regex to extract the embed ID.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q10</span> What is the most difficult feature you built?</div>
+    <div class="answer">
+      <div class="ans-main">The Razorpay payment integration was most challenging. Specifically, server-side signature verification — ensuring payment isn't faked by the client. I used <code>$this->api->utility->verifyPaymentSignature()</code> which uses HMAC-SHA256 to verify that the payment_id + order_id signature matches what Razorpay actually sent, preventing fraudulent requests.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q11</span> How does the rating system work?</div>
+    <div class="answer">
+      <div class="ans-main">After a booking is marked <code>completed</code>, the school can submit a rating (1-5) and comment. This is stored in the <code>reviews</code> table. The trainer's average rating is calculated using a computed attribute: <code>$this->reviews()->avg('rating')</code>. This average is shown on trainer cards and profile pages.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q12</span> How do email notifications work?</div>
+    <div class="answer">
+      <div class="ans-main">Using Laravel Mailable classes. When a booking is created, <code>Mail::to($trainer->email)->send(new BookingReceivedMail($booking))</code> is called. Each Mailable has an envelope (subject) and content (blade view). SMTP is configured in <code>.env</code> using Hostinger's smtp.hostinger.com on port 465 with SSL. Notifications trigger for: booking received, accepted, rejected, completed, and trainer approved.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q13</span> How does the auto-completion of bookings work?</div>
+    <div class="answer">
+      <div class="ans-main">A custom Artisan command <code>bookings:complete</code> queries all active bookings where <code>end_date < today</code> and updates their status to <code>completed</code>. This command is scheduled in <code>routes/console.php</code> to run daily at midnight using <code>Schedule::command('bookings:complete')->dailyAt('00:00')</code>. On Hostinger, a cron job runs <code>php artisan schedule:run</code> every minute.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q14</span> What would you improve in TheSchoolTech?</div>
+    <div class="answer">
+      <div class="ans-main">
+        1. Add an <strong>escrow payment system</strong> — hold funds until training completes<br>
+        2. Implement <strong>real-time notifications</strong> via WebSockets (Laravel Echo)<br>
+        3. Add <strong>trainer availability calendar</strong><br>
+        4. Build a <strong>mobile app</strong> using Flutter with Laravel API backend<br>
+        5. Add <strong>WhatsApp notifications</strong> via MSG91<br>
+        6. Implement <strong>platform commission</strong> model for revenue<br>
+        7. Add <strong>PDF invoice generation</strong> after payment
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q15</span> How would you scale TheSchoolTech for 100,000 users?</div>
+    <div class="answer">
+      <div class="ans-main">
+        1. Move from shared hosting to <strong>VPS/Cloud</strong> (AWS EC2 / DigitalOcean)<br>
+        2. Add <strong>Redis</strong> for caching trainer listings and sessions<br>
+        3. Use <strong>Queue workers</strong> (Redis queue) for email sending<br>
+        4. Add <strong>CDN</strong> (Cloudflare) for static assets and videos<br>
+        5. Use <strong>database read replicas</strong> for heavy queries<br>
+        6. Implement <strong>API rate limiting</strong> to prevent abuse<br>
+        7. Move to <strong>microservices</strong> — separate payment, notification, auth services
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q16</span> Why did you store teaching_subjects as JSON in the database?</div>
+    <div class="answer">
+      <div class="ans-main">Teaching subjects is a flexible, variable-length list per trainer. Creating a separate pivot table (trainer_subjects) would be more normalized but overkill for this use case. JSON storage is simpler to implement and fast enough for filtering. Laravel's <code>$casts = ['teaching_subjects' => 'array']</code> automatically handles JSON encode/decode. The tradeoff is that JSON columns can't be indexed efficiently for complex queries.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q17</span> How do you prevent a school from booking the same trainer twice?</div>
+    <div class="answer">
+      <div class="ans-main">In <code>BookingController@create</code>, we query for existing active bookings: <code>Booking::where('school_id', $school->id)->where('trainer_id', $trainer->id)->whereIn('status', ['pending','accepted','active'])->first()</code>. If found, the booking page shows a warning alert instead of the form.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q18</span> How is password security handled?</div>
+    <div class="answer">
+      <div class="ans-main">Passwords are hashed using <code>Hash::make($password)</code> which uses bcrypt algorithm. During login, <code>Auth::attempt(['email' => $email, 'password' => $password])</code> uses <code>Hash::check()</code> internally. Plain-text passwords are never stored. For password change, <code>Hash::check($currentPassword, $user->password)</code> verifies the old password before updating.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q19</span> How does trainer filtering/search work?</div>
+    <div class="answer">
+      <div class="ans-main">In <code>TrainerController@index</code>, a query builder starts with all approved/available trainers. Filters are applied conditionally using <code>$request->filled()</code> to check if parameter is present. For subject filtering, <code>whereJsonContains('teaching_subjects', $subject)</code> is used. City uses <code>LIKE</code> search. Results are paginated with <code>paginate(12)->withQueryString()</code> to preserve filter parameters in pagination links.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q20</span> What is the difference between TrainerProfile and User models?</div>
+    <div class="answer">
+      <div class="ans-main"><code>User</code> stores authentication data — email, password, role, basic contact info. <code>TrainerProfile</code> stores professional data — bio, qualifications, rates, subjects, approval status. They have a one-to-one relationship: <code>User hasOne TrainerProfile</code>. This separation follows Single Responsibility Principle and makes it easy to add different profile types (school, trainer) without modifying the core User model.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 2 ═══ -->
+<div class="part" id="p2">
+  <div class="part-header">
+    <span class="part-num">PART 02</span>
+    <span class="part-title">Explain Your Project (Spoken Answers)</span>
+  </div>
+  <div class="part-body">
+
+  <div class="tip tip-blue">💡 Practice these out loud before your interview. Natural speech wins over memorized answers.</div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">30s</span> Explain TheSchoolTech in 30 seconds. <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"TheSchoolTech is a Laravel-based web platform that connects private schools with verified computer trainers. Schools can search trainers by subject, book them for 1 to 3 months, and pay online via Razorpay. Trainers register, get admin approval, and start receiving bookings. The system handles the full flow — registration, booking, payment, email notifications, and reviews — with separate dashboards for Admin, School, and Trainer roles."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">1min</span> Explain TheSchoolTech in 1 minute. <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"TheSchoolTech solves a real problem — many private schools in India don't have computer teachers, so students miss out on modern skills like AI and Python. I built a platform using Laravel 13 and PHP 8.3 where school principals can register, browse verified trainer profiles, filter by subject and city, and book trainers for short-term contracts of 1, 2, or 3 months.<br><br>
+      The booking workflow is: school submits a request, trainer gets an email and accepts or rejects, then school pays via Razorpay. Once payment is verified server-side, the booking becomes active. After the training period ends, Laravel Scheduler automatically marks it as completed and sends a completion email. The school can then rate the trainer.<br><br>
+      The system has three roles — Admin, School, and Trainer — each with their own dashboard. I used Bootstrap 5 for the responsive frontend, MySQL for the database with 6 main tables, and Hostinger for deployment. The project is live at theschooltech.com."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Tech</span> Explain the technical architecture.</div>
+    <div class="answer">
+      <div class="ans-main">"TheSchoolTech follows Laravel's MVC architecture. Routes in <code>routes/web.php</code> map URLs to Controllers. Controllers handle business logic — they talk to Eloquent Models for database operations and return Blade views as responses.<br><br>
+      The database has 6 main tables: users, trainer_profiles, school_profiles, bookings, subjects, and reviews. Users are linked to their respective profiles via one-to-one relationships. Bookings connect schools and trainers via foreign keys.<br><br>
+      For payments, I use the Razorpay PHP SDK. The server creates an order via API, sends the order_id to the frontend, the user pays, and the server verifies the signature using HMAC-SHA256 before updating the booking status.<br><br>
+      Middleware handles authentication and role authorization. Laravel Mailable handles 5 types of email notifications. A custom Artisan Command with Laravel Scheduler auto-completes bookings daily."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Hard</span> Explain the most challenging feature.</div>
+    <div class="answer">
+      <div class="ans-main">"The most challenging part was Razorpay integration, specifically the signature verification step. The payment happens client-side in the browser, so I needed to ensure the server independently verifies that Razorpay actually processed the payment, not someone faking a success response.<br><br>
+      The solution is: Razorpay sends back a razorpay_signature which is an HMAC-SHA256 hash of the order_id and payment_id using the secret key. My server recreates this hash and compares. If they match, the payment is genuine. This prevents any client-side manipulation. I wrapped this in a try-catch — if verification fails, the booking remains in 'accepted' status and the user sees an error message."</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 3 ═══ -->
+<div class="part" id="p3">
+  <div class="part-header">
+    <span class="part-num">PART 03</span>
+    <span class="part-title">PHP Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is the difference between include and require? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Both include a PHP file. <strong>require</strong> causes a fatal error (E_COMPILE_ERROR) if the file is not found and stops execution. <strong>include</strong> only shows a warning and continues. Use <code>require</code> when the file is essential (like config), <code>include</code> when optional.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What are PHP superglobals? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Superglobals are built-in variables accessible from anywhere without using <code>global</code>. Main ones: <code>$_GET</code>, <code>$_POST</code>, <code>$_SESSION</code>, <code>$_COOKIE</code>, <code>$_SERVER</code>, <code>$_FILES</code>, <code>$_ENV</code>, <code>$_REQUEST</code>, <code>$GLOBALS</code>.</div>
+      <div class="answer-label proj-label">In TheSchoolTech</div>
+      <div class="ans-main">Laravel abstracts these — we use <code>$request->input()</code>, <code>$request->file()</code>, <code>session()</code> instead of raw superglobals for security and convenience.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is the difference between GET and POST? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main"><strong>GET</strong> — Data sent in URL, visible, cached, bookmarkable, max ~2048 chars. Used for reading/searching data.<br><strong>POST</strong> — Data in request body, not visible in URL, not cached, no size limit. Used for creating/modifying data. In TheSchoolTech, booking forms use POST. Trainer search uses GET (so filters can be bookmarked/shared).</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> How does session work in PHP?</div>
+    <div class="answer">
+      <div class="ans-main">Session stores data server-side. PHP creates a unique session ID stored as a cookie in the browser. On each request, PHP reads the session ID from cookie, loads the corresponding server-side file. <code>session_start()</code> initializes it. Data stored in <code>$_SESSION</code>. In Laravel, configured via <code>SESSION_DRIVER</code> in .env (file, database, redis).</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> What is a closure in PHP? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">A closure is an anonymous function that can capture variables from its outer scope using <code>use</code>.</div>
+      <div class="code-block">$multiplier = 3;
+$multiply = function($n) use ($multiplier) {
+    return $n * $multiplier;
+};
+echo $multiply(5); // 15</div>
+      <div class="ans-main">In TheSchoolTech, closures are used in route definitions, query scopes, and collection operations like <code>->filter(function($item) {...})</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> What is PDO and why use it? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">PDO (PHP Data Objects) is a database abstraction layer that supports multiple databases (MySQL, PostgreSQL, SQLite). Key benefit: prepared statements that prevent SQL injection. Laravel's Eloquent and Query Builder use PDO internally. We never write raw PDO in TheSchoolTech — Laravel handles it.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> What is SQL injection and how to prevent it?</div>
+    <div class="answer">
+      <div class="ans-main">SQL injection is when malicious SQL is injected via user input: <code>SELECT * FROM users WHERE email = '' OR 1=1 --'</code>. Prevention: use prepared statements / parameterized queries. In Laravel, Eloquent and Query Builder use PDO prepared statements automatically. Never use raw string concatenation with user input.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> What is Composer?</div>
+    <div class="answer">
+      <div class="ans-main">Composer is PHP's dependency manager. It manages packages listed in <code>composer.json</code>. <code>composer install</code> installs dependencies, <code>composer require package</code> adds new ones. TheSchoolTech uses it for Laravel framework, Razorpay SDK (<code>razorpay/razorpay</code>), and other packages.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q9</span> What is autoloading in PHP?</div>
+    <div class="answer">
+      <div class="ans-main">Autoloading automatically loads PHP classes without manual <code>require</code> statements. PSR-4 is the standard. Composer generates <code>vendor/autoload.php</code>. In Laravel, all classes in <code>app/</code> are autoloaded via <code>"App\\": "app/"</code> in composer.json.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q10</span> What are namespaces in PHP?</div>
+    <div class="answer">
+      <div class="ans-main">Namespaces organize code and prevent naming conflicts. Like folders for class names. In TheSchoolTech: <code>namespace App\Http\Controllers;</code> — the TrainerController lives in this namespace. We can have two classes named "Controller" in different namespaces without conflict.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q11</span> What is the difference between == and ===?</div>
+    <div class="answer">
+      <div class="ans-main"><code>==</code> compares values with type coercion (<code>0 == "0"</code> is true). <code>===</code> compares values AND type strictly (<code>0 === "0"</code> is false). Always use <code>===</code> in security-sensitive code to avoid bugs.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q12</span> What is exception handling in PHP? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">
+<div class="code-block">try {
+    $this->api->utility->verifyPaymentSignature([...]);
+    // success
+} catch (\Exception $e) {
+    // handle failure - in TheSchoolTech, redirect with error
+    return redirect()->back()->with('error', 'Payment failed');
+}</div>
+      In TheSchoolTech, Razorpay signature verification is wrapped in try-catch so if verification fails, the booking doesn't get activated and the user sees an error message.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 4 ═══ -->
+<div class="part" id="p4">
+  <div class="part-header">
+    <span class="part-num">PART 04</span>
+    <span class="part-title">PHP OOP Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What are the 4 pillars of OOP? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>Encapsulation</strong> — Hiding internal data, exposing only what's needed via public methods. TrainerProfile model encapsulates database logic.<br>
+        <strong>Inheritance</strong> — Child class inherits parent. In Laravel, <code>class TrainerController extends Controller</code>. All Mailable classes extend <code>Mailable</code>.<br>
+        <strong>Polymorphism</strong> — Same method name, different behavior. The <code>handle()</code> method in all Mailable classes behaves differently.<br>
+        <strong>Abstraction</strong> — Hiding complex implementation. We call <code>$booking->update(['status' => 'active'])</code> without knowing the SQL underneath.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What is the difference between abstract class and interface? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>Abstract class</strong> — Can have implemented methods + abstract methods. Single inheritance only. Used as base class.<br>
+        <strong>Interface</strong> — Only method signatures (no implementation). A class can implement multiple interfaces.<br>
+        In Laravel: <code>Mailable</code> is abstract-like. Contracts (like <code>ShouldQueue</code>) are interfaces. Our <code>BookingReceivedMail</code> extends <code>Mailable</code>.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is a Trait in PHP? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Traits are code reuse mechanisms for single-inheritance languages. A class can use multiple traits. In TheSchoolTech: <code>class Booking extends Model { use HasFactory, Notifiable; }</code>. <code>HasFactory</code> adds factory methods, <code>Notifiable</code> adds notification capabilities. Traits let us add these features without complex inheritance.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What are access modifiers? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>public</strong> — Accessible from anywhere. Most model methods are public.<br>
+        <strong>protected</strong> — Accessible within class and child classes. <code>$fillable</code> in Eloquent models is protected.<br>
+        <strong>private</strong> — Only within the class. In PaymentController, <code>private Api $api</code>.
+      </div>
+      <div class="code-block">class PaymentController extends Controller {
+    private Api $api;  // private
+
+    public function __construct() {  // public
+        $this->api = new Api(config('razorpay.key'), config('razorpay.secret'));
+    }
+}</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> What is Dependency Injection? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Dependency Injection means providing dependencies to a class from outside rather than the class creating them itself. Laravel's service container handles DI automatically.</div>
+      <div class="code-block">// Laravel injects Request automatically
+public function store(Request $request, TrainerProfile $trainer) {
+    // $request and $trainer injected by Laravel
+}</div>
+      <div class="ans-main">In TheSchoolTech, route model binding automatically injects Trainer, Booking models based on route parameters.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> What is static in PHP?</div>
+    <div class="answer">
+      <div class="ans-main">Static methods/properties belong to the class, not an instance. Called without creating an object: <code>User::find(1)</code>, <code>Booking::where(...)</code>. In Eloquent, all query methods are static-accessible via magic methods. The <code>static</code> keyword in late static binding refers to the called class.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> What is method overriding?</div>
+    <div class="answer">
+      <div class="ans-main">Child class defines a method with the same name as parent, replacing the parent's behavior. In Laravel, the <code>handle()</code> method in each Mailable overrides the parent's abstract method. The <code>rules()</code> method in Form Requests overrides the base class.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> What is the constructor and destructor?</div>
+    <div class="answer">
+      <div class="ans-main"><code>__construct()</code> runs when object is created. Used for initialization. In PaymentController, the constructor initializes the Razorpay API object. <code>__destruct()</code> runs when object is destroyed (out of scope). Rarely used in web applications.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 5 ═══ -->
+<div class="part" id="p5">
+  <div class="part-header">
+    <span class="part-num">PART 05</span>
+    <span class="part-title">Laravel Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is Laravel MVC architecture? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main"><strong>Model</strong> — Eloquent classes (User, Booking, TrainerProfile) — handle data and database logic.<br>
+      <strong>View</strong> — Blade templates (home.blade.php, school/dashboard.blade.php) — handle presentation.<br>
+      <strong>Controller</strong> — (TrainerController, BookingController) — handle request/response, call models, return views.<br>
+      Flow: Request → Route → Middleware → Controller → Model → Controller → View → Response.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What is Middleware in Laravel? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Middleware runs before/after HTTP requests. Like a filter pipeline. In TheSchoolTech: <code>auth</code> middleware checks if user is logged in. Custom <code>RoleMiddleware</code> checks if user has correct role. CSRF middleware validates form tokens. If middleware fails, request is rejected before reaching controller.</div>
+      <div class="code-block">Route::middleware(['auth', 'role:school'])->group(function () {
+    Route::get('/dashboard', [SchoolController::class, 'dashboard']);
+});</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is Eloquent ORM? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Eloquent is Laravel's ORM (Object Relational Mapper). Each database table has a corresponding Model class. Instead of writing SQL, you write PHP: <code>Booking::where('status', 'active')->get()</code>. Eloquent handles relationships, casting, mass assignment protection, timestamps automatically. In TheSchoolTech, all database operations use Eloquent.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What is $fillable and why is it important? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main"><code>$fillable</code> is a whitelist of columns that can be mass-assigned via <code>Model::create()</code> or <code>$model->fill()</code>. Without it, a malicious user could submit extra form fields like <code>role=admin</code> and override protected columns. It prevents Mass Assignment vulnerability.</div>
+      <div class="code-block">// In User model - role is in fillable but 
+// controlled — only set explicitly in controller
+protected $fillable = ['name', 'email', 'password', 'role', ...];</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> What are Eloquent relationships? Explain with TheSchoolTech. <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>hasOne</strong>: User hasOne TrainerProfile (one user → one trainer profile)<br>
+        <strong>belongsTo</strong>: TrainerProfile belongsTo User (trainer profile → its user)<br>
+        <strong>hasMany</strong>: TrainerProfile hasMany Bookings (one trainer → many bookings)<br>
+        <strong>hasMany</strong>: TrainerProfile hasMany Reviews
+      </div>
+      <div class="code-block">// Usage in controller
+$trainer = TrainerProfile::with('user', 'reviews')->find($id);
+echo $trainer->user->name;   // User's name
+echo $trainer->reviews->count(); // Number of reviews</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> What is N+1 problem and how to solve it? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">N+1 problem: if you load 10 trainers and then loop to get each trainer's user, Laravel makes 1 (get trainers) + 10 (get each user) = 11 queries. Fix: eager loading with <code>with()</code>.</div>
+      <div class="code-block">// ❌ N+1 problem
+$trainers = TrainerProfile::all();
+foreach ($trainers as $t) { echo $t->user->name; } // 1+N queries
+
+// ✅ Eager loading - only 2 queries
+$trainers = TrainerProfile::with('user')->get();</div>
+      <div class="ans-main">In TheSchoolTech, all trainer listings use <code>with('user')</code> to avoid N+1.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> What are Migrations?</div>
+    <div class="answer">
+      <div class="ans-main">Migrations are version control for the database schema. They're PHP files that define table structure. <code>php artisan migrate</code> runs them in order. <code>php artisan migrate:rollback</code> reverses them. In TheSchoolTech, separate migrations for users, trainer_profiles, school_profiles, subjects, bookings, reviews tables. Also an alter migration to add demo_video column was added separately.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> What are Seeders?</div>
+    <div class="answer">
+      <div class="ans-main">Seeders populate the database with test/default data. <code>php artisan db:seed</code> runs the DatabaseSeeder. In TheSchoolTech, the seeder creates: 18 subjects with icons/colors, admin user, demo school, and 3 demo trainers with pre-approved status. <code>firstOrCreate()</code> prevents duplicates on re-seeding.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q9</span> What is CSRF and how does Laravel handle it? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">CSRF (Cross-Site Request Forgery) is when a malicious site tricks a user's browser into making requests to your site. Laravel generates a unique CSRF token per session. Every HTML form must include <code>@csrf</code> which adds a hidden <code>_token</code> field. The <code>VerifyCsrfToken</code> middleware validates this token on every POST/PUT/DELETE request. Ajax requests need the token in headers.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q10</span> What are Accessors and Mutators? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main"><strong>Accessor</strong> — formats attribute when getting. <strong>Mutator</strong> — transforms attribute when setting.</div>
+      <div class="code-block">// Accessor in TrainerProfile
+public function getAverageRatingAttribute(): float {
+    return round($this->reviews()->avg('rating') ?? 0, 1);
+}
+// Usage: $trainer->average_rating (auto-called)
+
+// Accessor for YouTube embed ID
+public function getYoutubeEmbedIdAttribute(): ?string {
+    preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/',
+        $this->youtube_link, $matches);
+    return $matches[1] ?? null;
+}</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q11</span> What are Laravel Collections?</div>
+    <div class="answer">
+      <div class="ans-main">Collections are a fluent wrapper around arrays with powerful methods. Eloquent returns collections. In TheSchoolTech: <code>$bookings->where('status', 'pending')</code> in the Blade template filters a collection. Methods: <code>filter()</code>, <code>map()</code>, <code>pluck()</code>, <code>groupBy()</code>, <code>count()</code>, <code>sum()</code> etc.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q12</span> What is Laravel Mailable? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Mailable is a class that represents an email. Each email type in TheSchoolTech has its own Mailable: BookingReceivedMail, BookingAcceptedMail, BookingRejectedMail, BookingCompletedMail, TrainerApprovedMail. They define the subject (Envelope), template (Content), and attachments. Sent via <code>Mail::to($email)->send(new BookingAcceptedMail($booking))</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q13</span> What is the Service Container in Laravel?</div>
+    <div class="answer">
+      <div class="ans-main">The Service Container is Laravel's IoC (Inversion of Control) container — it manages class dependencies and performs dependency injection. When you type-hint a class in a controller constructor or method, Laravel automatically resolves and injects it. Route model binding is an example — <code>TrainerProfile $trainer</code> in a method is automatically fetched from DB.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q14</span> What is Route Model Binding?</div>
+    <div class="answer">
+      <div class="ans-main">Laravel automatically fetches model instances from route parameters. If route is <code>/booking/{booking}</code> and controller has <code>Booking $booking</code>, Laravel fetches the Booking by ID automatically. If not found, returns 404. In TheSchoolTech used in BookingController, PaymentController for booking operations.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q15</span> What is Laravel Scheduler?</div>
+    <div class="answer">
+      <div class="ans-main">Laravel Scheduler defines recurring tasks. In <code>routes/console.php</code>: <code>Schedule::command('bookings:complete')->dailyAt('00:00')</code>. A single cron entry on the server runs <code>php artisan schedule:run</code> every minute, and Laravel determines which scheduled tasks are due. In TheSchoolTech, used to auto-complete bookings daily.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q16</span> What is Blade templating?</div>
+    <div class="answer">
+      <div class="ans-main">Blade is Laravel's templating engine. Features: <code>@extends</code>, <code>@section</code>, <code>@yield</code> for layouts. <code>@foreach</code>, <code>@if</code>, <code>@forelse</code> for logic. <code>{{ $var }}</code> for escaped output, <code>{!! $var !!}</code> for unescaped (like status_badge HTML). <code>@csrf</code> for CSRF tokens. Compiled to plain PHP and cached. TheSchoolTech has layouts/app.blade.php, layouts/dashboard.blade.php as master layouts.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q17</span> What is Pagination in Laravel?</div>
+    <div class="answer">
+      <div class="ans-main"><code>paginate(12)</code> on a query returns a Paginator instance. <code>withQueryString()</code> preserves URL parameters (filters) in page links. In views: <code>{{ $trainers->links() }}</code> renders Bootstrap-compatible page numbers. In TheSchoolTech, trainer listing, bookings, admin tables all use pagination.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q18</span> What is the difference between get() and first() in Eloquent?</div>
+    <div class="answer">
+      <div class="ans-main"><code>get()</code> returns a Collection (array of models). <code>first()</code> returns a single Model or null. <code>find($id)</code> returns model by primary key or null. <code>findOrFail($id)</code> returns model or throws 404. In TheSchoolTech, <code>first()</code> used to check existing bookings, <code>get()</code> used for listings.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 6 ═══ -->
+<div class="part" id="p6">
+  <div class="part-header">
+    <span class="part-num">PART 06</span>
+    <span class="part-title">MySQL / SQL Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>INNER JOIN</strong> — Returns rows where match exists in BOTH tables.<br>
+        <strong>LEFT JOIN</strong> — Returns all rows from left table + matching from right (NULL if no match).<br>
+        <strong>RIGHT JOIN</strong> — Returns all rows from right table + matching from left.
+      </div>
+      <div class="code-block">-- Get all bookings with trainer name (INNER - only matched)
+SELECT b.*, u.name FROM bookings b
+INNER JOIN trainer_profiles tp ON b.trainer_id = tp.id
+INNER JOIN users u ON tp.user_id = u.id;
+
+-- Get all trainers even if no bookings (LEFT)
+SELECT tp.*, COUNT(b.id) as bookings
+FROM trainer_profiles tp
+LEFT JOIN bookings b ON tp.id = b.trainer_id
+GROUP BY tp.id;</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What is the difference between WHERE and HAVING?</div>
+    <div class="answer">
+      <div class="ans-main"><code>WHERE</code> filters rows before aggregation. <code>HAVING</code> filters after GROUP BY aggregation.</div>
+      <div class="code-block">-- Trainers with more than 2 bookings
+SELECT trainer_id, COUNT(*) as total
+FROM bookings
+WHERE status = 'completed'       -- filter before grouping
+GROUP BY trainer_id
+HAVING COUNT(*) > 2;             -- filter after grouping</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is Normalization? Explain 1NF, 2NF, 3NF. <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>1NF</strong> — No repeating groups, atomic values, each column has single value.<br>
+        <strong>2NF</strong> — 1NF + no partial dependencies (non-key columns depend on WHOLE primary key).<br>
+        <strong>3NF</strong> — 2NF + no transitive dependencies (non-key columns don't depend on other non-key columns).<br><br>
+        TheSchoolTech DB is mostly 3NF. Note: <code>teaching_subjects</code> stored as JSON technically violates 1NF — a design tradeoff for flexibility.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What is ACID in database transactions? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>Atomicity</strong> — Transaction is all-or-nothing.<br>
+        <strong>Consistency</strong> — DB moves from one valid state to another.<br>
+        <strong>Isolation</strong> — Concurrent transactions don't interfere.<br>
+        <strong>Durability</strong> — Committed data persists even after crash.<br><br>
+        In TheSchoolTech, payment processing should ideally use DB transactions:
+      </div>
+      <div class="code-block">DB::transaction(function() use ($booking, $request) {
+    $booking->update(['payment_status' => 'paid', 'status' => 'active']);
+    // If this fails, payment_status update also rolls back
+});</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> What is the difference between DELETE, TRUNCATE, DROP?</div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>DELETE</strong> — Removes specific rows, logged, can WHERE, can rollback.<br>
+        <strong>TRUNCATE</strong> — Removes all rows, not logged per row, faster, resets auto-increment, can't rollback easily.<br>
+        <strong>DROP</strong> — Removes entire table structure and data permanently.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> What is an Index and why use it? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Index speeds up SELECT queries by creating a data structure (B-tree) for fast lookups. Without index, MySQL scans every row. In TheSchoolTech: <code>email</code> in users table has UNIQUE index (fast login lookups). <code>approval_status</code> in trainer_profiles should be indexed (frequently filtered). Foreign keys automatically create indexes. Tradeoff: faster reads but slower writes and more storage.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> Explain the bookings table design and why.</div>
+    <div class="answer">
+      <div class="ans-main">Bookings table connects schools and trainers with: <code>school_id FK</code> (→ school_profiles), <code>trainer_id FK</code> (→ trainer_profiles). Status enum: pending/accepted/rejected/active/completed/cancelled — tracks the full lifecycle. <code>payment_id</code> stores Razorpay payment ID for reconciliation. <code>subjects JSON</code> stores selected subjects per booking (flexible, varies per booking). <code>total_amount</code> stored at booking time so rate changes don't affect existing bookings.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> What is a foreign key constraint?</div>
+    <div class="answer">
+      <div class="ans-main">A foreign key ensures referential integrity — a row in child table can't reference a non-existent row in parent table. In TheSchoolTech: <code>bookings.school_id</code> references <code>school_profiles.id</code>. <code>cascadeOnDelete()</code> means if a school profile is deleted, all their bookings are also deleted automatically. Without FK constraints, orphan data can accumulate.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q9</span> What is UNION vs UNION ALL?</div>
+    <div class="answer">
+      <div class="ans-main"><code>UNION</code> combines results of two queries and removes duplicates (slower). <code>UNION ALL</code> combines and keeps all rows including duplicates (faster). Use UNION ALL when you know results won't have duplicates or when duplicates are acceptable.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q10</span> How to get average rating per trainer from the reviews table?</div>
+    <div class="answer">
+      <div class="code-block">SELECT tp.id, u.name, AVG(r.rating) as avg_rating, COUNT(r.id) as total_reviews
+FROM trainer_profiles tp
+JOIN users u ON tp.user_id = u.id
+LEFT JOIN reviews r ON tp.id = r.trainer_id
+GROUP BY tp.id, u.name
+ORDER BY avg_rating DESC;</div>
+      <div class="ans-main">In Eloquent: <code>$this->reviews()->avg('rating')</code> does this query automatically.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 7 ═══ -->
+<div class="part" id="p7">
+  <div class="part-header">
+    <span class="part-num">PART 07</span>
+    <span class="part-title">Razorpay / Payment Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> Explain the complete Razorpay payment flow in TheSchoolTech. <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>Step 1 — Order Creation (Server)</strong>: When school clicks Pay, <code>PaymentController@showPayment</code> calls Razorpay API to create an order with amount (in paise), currency INR, and booking reference. Returns an <code>order_id</code>.<br><br>
+        <strong>Step 2 — Checkout (Client)</strong>: The <code>order_id</code> is passed to the Razorpay checkout.js on the payment page. User pays via card/UPI/netbanking in Razorpay's popup.<br><br>
+        <strong>Step 3 — Response (Client)</strong>: Razorpay sends back <code>razorpay_payment_id</code>, <code>razorpay_order_id</code>, <code>razorpay_signature</code> to the browser.<br><br>
+        <strong>Step 4 — Verification (Server)</strong>: These are submitted via hidden form to <code>verifyPayment()</code>. Server verifies signature = HMAC-SHA256(order_id + "|" + payment_id, secret_key).<br><br>
+        <strong>Step 5 — Activation</strong>: If valid, booking status → active, payment_status → paid. Redirect with success message.
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> Why do we verify the signature server-side? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Without server-side verification, anyone could fake a payment response. They could manually call the verify endpoint with made-up payment_id and order_id values. The signature is generated using the Razorpay Secret Key (which only we and Razorpay know). Only a genuine Razorpay payment will produce the correct signature. This prevents fraudulent booking activations without actual payment.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What if payment succeeds on Razorpay but our server fails to update? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">This is a critical edge case. Solutions: 1) Use Razorpay Webhooks — Razorpay sends a POST to our webhook endpoint when payment succeeds. Even if user closed browser, webhook updates the DB. 2) The <code>payment_id</code> stored in booking allows manual reconciliation. 3) Use DB transactions so payment_status and status update atomically. In TheSchoolTech currently webhooks are not implemented — an improvement to add.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What is the difference between order_id and payment_id?</div>
+    <div class="answer">
+      <div class="ans-main"><strong>order_id</strong> (e.g., <code>order_xxx</code>) — Created by our server BEFORE payment. Represents the intent to pay. Stored in booking record.<br><strong>payment_id</strong> (e.g., <code>pay_xxx</code>) — Generated by Razorpay AFTER successful payment. Represents the actual completed transaction. Stored after verification.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> How to prevent duplicate payments?</div>
+    <div class="answer">
+      <div class="ans-main">In <code>showPayment()</code>, we check <code>if ($booking->payment_status === 'paid') return back()->with('error', 'Already paid')</code>. Also, Razorpay orders are idempotent — the same order_id can't be paid twice. The signature verification also ensures each payment is unique and from Razorpay. A receipt field in the order can be checked for uniqueness.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> Why is the amount in paise, not rupees?</div>
+    <div class="answer">
+      <div class="ans-main">Razorpay API requires amount in the smallest currency unit to avoid floating point issues. For INR, 1 rupee = 100 paise. So ₹15,000 = 1,500,000 paise. In code: <code>'amount' => $booking->total_amount * 100</code>. This prevents rounding errors that could occur with decimal rupee amounts.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q7</span> What are Razorpay test credentials?</div>
+    <div class="answer">
+      <div class="ans-main">Test mode uses keys starting with <code>rzp_test_</code>. Test cards: 4111 1111 1111 1111 (Visa), expiry 12/25, CVV 123, OTP 1234. No real money is charged. For production, keys start with <code>rzp_live_</code> and real payments are processed. Always use environment variables — never hardcode keys in source code.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q8</span> Why did you choose Razorpay over other payment gateways?</div>
+    <div class="answer">
+      <div class="ans-main">Razorpay is India-focused: supports UPI, IMPS, NEFT which Indian schools prefer. Easy PHP SDK. Simple integration. Good documentation. No monthly fee — only per-transaction (2%). Supports test mode for development. Alternative: PayU, Cashfree — but Razorpay has better developer experience and wider adoption in India.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 8 ═══ -->
+<div class="part" id="p8">
+  <div class="part-header">
+    <span class="part-num">PART 08</span>
+    <span class="part-title">REST API Interview Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is a REST API? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">REST (Representational State Transfer) is an architectural style for APIs using HTTP. Key principles: Stateless, Client-Server, Uniform interface (standard HTTP methods), Resource-based URLs. Each request contains all necessary info — server doesn't store client state between requests.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What are HTTP methods and when to use each? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>GET</strong> — Read data. <code>GET /trainers</code> (list), <code>GET /trainers/1</code> (single)<br>
+        <strong>POST</strong> — Create new resource. <code>POST /bookings</code><br>
+        <strong>PUT</strong> — Update entire resource. <code>PUT /school/profile</code><br>
+        <strong>PATCH</strong> — Partial update. <code>PATCH /booking/1</code> (just status)<br>
+        <strong>DELETE</strong> — Delete resource. <code>DELETE /video/1</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What are HTTP status codes? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>200 OK</strong> — Success<br>
+        <strong>201 Created</strong> — Resource created<br>
+        <strong>301/302</strong> — Redirect (used after form submissions in TheSchoolTech)<br>
+        <strong>400 Bad Request</strong> — Invalid input<br>
+        <strong>401 Unauthorized</strong> — Not logged in<br>
+        <strong>403 Forbidden</strong> — Logged in but no permission (role mismatch)<br>
+        <strong>404 Not Found</strong> — Resource doesn't exist<br>
+        <strong>422 Unprocessable</strong> — Validation failed<br>
+        <strong>500 Internal Server Error</strong> — Server crash
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What is the Razorpay API call in TheSchoolTech?</div>
+    <div class="answer">
+      <div class="code-block">// POST to Razorpay API
+$order = $this->api->order->create([
+    'receipt'         => 'booking_' . $booking->id,
+    'amount'          => $booking->total_amount * 100,
+    'currency'        => 'INR',
+    'payment_capture' => 1,
+]);
+// Returns: { id: "order_xxx", amount: 1500000, currency: "INR", ... }</div>
+      <div class="ans-main">This is an HTTP POST to Razorpay's API. The SDK handles authentication using Basic Auth with the API key and secret.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> REST vs SOAP — what's the difference?</div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>REST</strong> — Lightweight, uses JSON/XML, stateless, uses standard HTTP, easy to use, modern standard.<br>
+        <strong>SOAP</strong> — Heavyweight, XML only, has its own protocol, strict standards (WSDL), used in enterprise/banking.<br>
+        Razorpay uses REST API. Laravel also makes REST APIs easy with API routes and resources.
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 9 ═══ -->
+<div class="part" id="p9">
+  <div class="part-header">
+    <span class="part-num">PART 09</span>
+    <span class="part-title">Authentication & Security Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> Authentication vs Authorization — difference? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main"><strong>Authentication</strong> — WHO are you? Verified via email+password login. Laravel's <code>Auth::attempt()</code>.<br>
+      <strong>Authorization</strong> — WHAT can you do? Checked via RoleMiddleware. A trainer CAN'T access school dashboard even if logged in.<br>
+      In TheSchoolTech: First <code>auth</code> middleware checks if logged in (authentication). Then <code>role:school</code> middleware checks if role is school (authorization).</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> How does login work in TheSchoolTech? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main"><code>Auth::attempt(['email' => $email, 'password' => $password])</code> — Laravel finds user by email, then uses <code>Hash::check()</code> to compare password with stored bcrypt hash. If match, creates session, sets <code>Auth::user()</code>. After login, redirected based on role using <code>match($user->role) { 'admin' => route('admin.dashboard'), ... }</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is XSS and how does Laravel prevent it? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">XSS (Cross-Site Scripting) — attacker injects malicious JavaScript into the page that runs in other users' browsers. Laravel's Blade <code>{{ $var }}</code> automatically HTML-encodes output, converting <code>&lt;script&gt;</code> to <code>&amp;lt;script&amp;gt;</code>. Only use <code>{!! $var !!}</code> for trusted content (like the status_badge in TheSchoolTech which generates our own HTML).</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> How is file upload secured in TheSchoolTech?</div>
+    <div class="answer">
+      <div class="ans-main">
+        1. <code>mimes:jpg,jpeg,png</code> validation — only image types allowed for photo<br>
+        2. <code>mimes:mp4,mov,avi,webm</code> — only video types for demo video<br>
+        3. <code>max:2048</code> (2MB) for photos, <code>max:51200</code> (50MB) for videos<br>
+        4. Files stored in <code>storage/app/public</code> — outside web root<br>
+        5. Laravel generates random filename — prevents path traversal attacks<br>
+        6. <code>storage:link</code> creates symlink so files are web-accessible without exposing storage directory
+      </div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> How do you prevent Mass Assignment vulnerability? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Using <code>$fillable</code> in all models. Example: if someone sends <code>POST /register</code> with <code>role=admin</code>, Laravel won't set it via <code>User::create($request->all())</code> if <code>role</code> is not handled. Better practice: use <code>$request->only(['name', 'email', 'password'])</code> instead of <code>$request->all()</code>. The <code>role</code> is set explicitly: <code>'role' => 'school'</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> How do you secure .env file and API keys?</div>
+    <div class="answer">
+      <div class="ans-main">
+        1. Never commit .env to Git — add to .gitignore<br>
+        2. Store in environment variables on server<br>
+        3. Razorpay keys in .env: <code>RAZORPAY_KEY</code>, <code>RAZORPAY_SECRET</code><br>
+        4. Access via <code>config('razorpay.key')</code> — never hardcode<br>
+        5. On production: <code>APP_DEBUG=false</code> — never expose errors<br>
+        6. Hostinger: use File Manager or SSH to set .env — not visible in browser
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 10 ═══ -->
+<div class="part" id="p10">
+  <div class="part-header">
+    <span class="part-num">PART 10</span>
+    <span class="part-title">HTML / CSS / JavaScript Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q1</span> What is the CSS Box Model? <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">Every HTML element is a box: Content → Padding → Border → Margin. <code>box-sizing: border-box</code> (set in TheSchoolTech's CSS) includes padding and border in the element's total width — predictable layout. Without it, adding padding increases element's total size.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q2</span> What is Flexbox? How is it used in TheSchoolTech?</div>
+    <div class="answer">
+      <div class="ans-main">Flexbox is a CSS layout model for 1D layouts (row or column). Key properties: <code>display:flex</code>, <code>align-items</code>, <code>justify-content</code>, <code>gap</code>, <code>flex-grow</code>. In TheSchoolTech's dashboard: <code>d-flex</code> (Bootstrap utility = <code>display:flex</code>) used for sidebar + content layout. Trainer cards use flexbox for avatar + info alignment.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q3</span> What is AJAX? How is it used in TheSchoolTech?</div>
+    <div class="answer">
+      <div class="ans-main">AJAX (Asynchronous JavaScript and XML) — makes HTTP requests from browser without page reload. In TheSchoolTech: Razorpay checkout.js uses AJAX to process payment in popup without leaving the page. The payment handler function is called on success: <code>handler: function(response) { document.getElementById('payment-form').submit(); }</code>.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q4</span> What is responsive design?</div>
+    <div class="answer">
+      <div class="ans-main">Responsive design makes websites work on all screen sizes. In TheSchoolTech: Bootstrap 5 grid system (<code>col-md-6 col-lg-4</code>) automatically adjusts columns. <code>d-none d-lg-block</code> hides sidebar on mobile. Media queries in custom CSS: <code>@media (max-width: 991px) { .dash-sidebar { display: none; } }</code>. Mobile gets a simplified nav bar with icon buttons.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q5</span> Explain the JavaScript video toggle in TheSchoolTech.</div>
+    <div class="answer">
+      <div class="code-block">function toggleVideo(id) {
+    const video = document.getElementById('vid_' + id);
+    if (video.paused) {
+        // Pause all others first
+        document.querySelectorAll('video').forEach(v => v.pause());
+        video.play();
+    } else {
+        video.pause();
+    }
+}</div>
+      <div class="ans-main">Uses DOM manipulation to find video by ID, controls playback. Event-driven — triggered by clicking the overlay div. Only one video plays at a time — all others are paused first.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">Q6</span> What is the difference between let, var, const?</div>
+    <div class="answer">
+      <div class="ans-main">
+        <strong>var</strong> — Function scoped, hoisted, can be redeclared. Old style, avoid.<br>
+        <strong>let</strong> — Block scoped, not hoisted, can't be redeclared. Use for changeable values.<br>
+        <strong>const</strong> — Block scoped, must be initialized, can't be reassigned. Use for fixed values.<br>
+        In TheSchoolTech's JS: <code>const video = document.getElementById(...)</code>, <code>const reader = new FileReader()</code>.
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 11 ═══ -->
+<div class="part" id="p11">
+  <div class="part-header">
+    <span class="part-num">PART 11</span>
+    <span class="part-title">Scenario-Based Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S1</span> What if two schools try to book the same trainer simultaneously? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Trainers can have multiple bookings (not exclusive). So two schools can book the same trainer — the trainer manually accepts/rejects. Trainer can decline if already busy. For exclusive slots, add a calendar availability system. For true race conditions, use DB transactions with SELECT FOR UPDATE to lock the trainer record during booking creation.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S2</span> Razorpay payment succeeds but database update fails — what happens? <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">Critical problem! Solution: 1) Wrap DB update in try-catch. 2) If DB fails, log the payment_id. 3) Use Razorpay Webhooks as backup — Razorpay independently notifies our server. 4) Add a reconciliation job that checks Razorpay payment status against our DB. The stored payment_id in booking allows manual fix: check Razorpay dashboard and manually update booking status.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S3</span> What if an unauthorized user tries to access admin URL directly?</div>
+    <div class="answer">
+      <div class="ans-main">They get a 403 Forbidden. The <code>RoleMiddleware</code> runs first: checks <code>Auth::user()->role</code>. If role is 'school' trying to access <code>/admin/dashboard</code>, the middleware returns <code>abort(403, 'Access Denied')</code>. Laravel's exception handler renders the 403 error page. They never reach the controller.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S4</span> What if a user submits an invalid booking form?</div>
+    <div class="answer">
+      <div class="ans-main">Laravel's <code>$request->validate()</code> in <code>BookingController@store</code> runs first. If validation fails, Laravel automatically redirects back with errors stored in session flash. Blade displays errors: <code>@if($errors->any()) @foreach($errors->all() as $e)</code>. Old input is preserved via <code>old('field')</code> so user doesn't lose their data.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S5</span> What if someone changes the booking ID in the URL?</div>
+    <div class="answer">
+      <div class="ans-main">In <code>BookingController@show</code>: <code>$school = Auth::user()->schoolProfile; if ($booking->school_id !== $school->id) abort(403);</code> — We verify the booking belongs to the logged-in school. Similarly in trainer routes. Route model binding already ensures the booking exists (404 if not). Authorization check ensures ownership. This prevents IDOR (Insecure Direct Object Reference) attacks.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S6</span> What if 10,000 users hit the website at once?</div>
+    <div class="answer">
+      <div class="ans-main">Current shared hosting would struggle. Solutions: 1) Add Redis caching for trainer listing (most visited page) — cache for 5-10 minutes. 2) Use Queue for email sending — don't send synchronously. 3) Move to VPS/cloud with more resources. 4) Add CDN (Cloudflare) for static assets. 5) Add database indexes on frequently queried columns. 6) Use lazy loading for images/videos on home page.</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">S7</span> What if an uploaded video file is malicious?</div>
+    <div class="answer">
+      <div class="ans-main">1) MIME type validation: <code>'demo_video' => 'mimes:mp4,mov,avi,webm'</code> — Laravel checks actual file content, not just extension. 2) Files stored outside web root in storage/ — not directly executable. 3) Files accessed via symlink URL, not executed. 4) Could add virus scanning with ClamAV for extra security. 5) Max file size limit prevents large malicious files.</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 12 ═══ -->
+<div class="part" id="p12">
+  <div class="part-header">
+    <span class="part-num">PART 12</span>
+    <span class="part-title">Tricky Follow-Up Questions</span>
+  </div>
+  <div class="part-body">
+
+  <div class="tip tip-orange">⚠️ These are the questions that trip up candidates. Know these cold.</div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">T1</span> "Why did you use Laravel?" → "Why not Core PHP?" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"Core PHP would require writing everything from scratch — authentication, database connections, CSRF protection, routing, email handling, file storage. Laravel provides all of these out of the box. For a project with booking system, payment integration, role-based auth, and emails, Core PHP would have taken 3x longer. Laravel's conventions also make the code more maintainable."<br><br>
+      Follow-up: "But Laravel is heavy?" → "Modern Laravel is very optimized. Route caching, config caching reduce overhead. The productivity gain far outweighs the minimal performance cost for this type of application."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">T2</span> "You used MySQL" → "Why not PostgreSQL or MongoDB?" <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">"MySQL is most compatible with shared hosting (Hostinger provides it by default), has excellent Laravel/Eloquent support, and our data is relational — schools, trainers, bookings all have clear relationships with foreign keys. PostgreSQL would also work but adds unnecessary complexity for deployment. MongoDB wouldn't be ideal here because our data is structured with strict relationships, not document-like."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">T3</span> "You store teaching_subjects as JSON" → "Isn't that bad practice?" <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">"You're right that it violates strict normalization (1NF). The proper approach is a many-to-many pivot table (trainer_subjects). I chose JSON for faster development. The tradeoffs: can't efficiently JOIN on subjects, can't enforce FK constraints. For the current scale, it works fine. Given more time, I'd create a proper pivot table for better queryability and data integrity."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">T4</span> "How does Auth::attempt() work internally?" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"Auth::attempt() first fetches the user by email from the database. Then it uses Hash::check() which calls PHP's password_verify() to compare the submitted password against the bcrypt hash stored in DB. Bcrypt includes a random salt in the hash, so even identical passwords have different hashes. If check passes, Laravel creates a session and stores the user's ID. The session cookie is sent to browser for subsequent requests."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">T5</span> "What happens if Razorpay is down during payment?" <span class="badge star">⭐</span></div>
+    <div class="answer">
+      <div class="ans-main">"The order creation in showPayment() would fail and throw an exception. It's wrapped in a try-catch — catch block would redirect back with an error: 'Payment service is temporarily unavailable, please try again.' The booking remains in accepted status. User can retry. For production, I'd add retry logic and monitoring alerts."</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 13 ═══ -->
+<div class="part" id="p13">
+  <div class="part-header">
+    <span class="part-num">PART 13</span>
+    <span class="part-title">Resume Cross-Questioning</span>
+  </div>
+  <div class="part-body">
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">R1</span> "You mentioned Laravel — what exactly did you do in Laravel?" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"I used: Laravel Routing for all URL mapping; Eloquent ORM for all database operations with 6 models and relationships; Blade templating for 20+ views with master layouts; Custom Middleware for role-based access control; Laravel Mailable for 5 types of email notifications; Laravel Scheduler for daily auto-completion of bookings; Form validation with $request->validate(); File storage for photos and videos; Auth facade for login/logout/session management."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">R2</span> "Explain one API you created" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"The payment verification endpoint: POST /school/booking/{id}/payment/verify. It receives razorpay_payment_id, razorpay_order_id, razorpay_signature. Server verifies signature using Razorpay PHP SDK. If valid, updates booking in database. Returns a redirect response with success/error message. It's protected by auth + role:school middleware."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">R3</span> "You mentioned Razorpay — explain the payment flow" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"Server creates Razorpay order via API with amount in paise. order_id passed to frontend. Razorpay checkout popup opens. User pays. Razorpay sends payment_id + order_id + signature back. Hidden form submits these to server. Server verifies signature (HMAC-SHA256). If valid, booking becomes active. This prevents fake payment responses."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">R4</span> "Explain your database structure" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"6 main tables. users is central — stores all user types with a role column. trainer_profiles and school_profiles extend users with role-specific data via one-to-one relationship. bookings is the core transaction table — links school_profiles and trainer_profiles, tracks status through 6 states from pending to completed. subjects is a lookup table. reviews store post-completion feedback."</div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <div class="q" onclick="toggle(this)"><span class="q-num">R5</span> "Where did you use OOP in the project?" <span class="badge fire">🔥</span></div>
+    <div class="answer">
+      <div class="ans-main">"Everywhere — Laravel itself is heavily OOP. Specifically: Inheritance — TrainerController extends Controller, all Mailables extend Mailable. Encapsulation — TrainerProfile model encapsulates all trainer-related DB logic. Polymorphism — each Mailable's handle() method behaves differently. Dependency Injection — Laravel injects Request, Model instances into controller methods. Traits — HasFactory, Notifiable, Queueable used in models and mailables."</div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 14 ═══ -->
+<div class="part" id="p14">
+  <div class="part-header">
+    <span class="part-num">PART 14</span>
+    <span class="part-title">Rapid Fire Round — 50 Q&A</span>
+  </div>
+  <div class="part-body">
+  <div class="rf-grid">
+    <div class="rf-item"><div class="rf-q">What is ORM?</div><div class="rf-a">Object Relational Mapper — maps DB tables to PHP classes</div></div>
+    <div class="rf-item"><div class="rf-q">What is Eloquent?</div><div class="rf-a">Laravel's ORM for database operations</div></div>
+    <div class="rf-item"><div class="rf-q">What is MVC?</div><div class="rf-a">Model-View-Controller design pattern</div></div>
+    <div class="rf-item"><div class="rf-q">What is CSRF?</div><div class="rf-a">Cross-Site Request Forgery — prevented by @csrf token</div></div>
+    <div class="rf-item"><div class="rf-q">What is XSS?</div><div class="rf-a">Cross-Site Scripting — prevented by {{ }} in Blade</div></div>
+    <div class="rf-item"><div class="rf-q">What is bcrypt?</div><div class="rf-a">Password hashing algorithm — used by Hash::make()</div></div>
+    <div class="rf-item"><div class="rf-q">What does php artisan migrate do?</div><div class="rf-a">Runs pending migration files to update DB schema</div></div>
+    <div class="rf-item"><div class="rf-q">What is eager loading?</div><div class="rf-a">Loading related models upfront with with() to prevent N+1</div></div>
+    <div class="rf-item"><div class="rf-q">GET vs POST?</div><div class="rf-a">GET: data in URL, read. POST: data in body, write</div></div>
+    <div class="rf-item"><div class="rf-q">What is a migration?</div><div class="rf-a">Version control for database schema</div></div>
+    <div class="rf-item"><div class="rf-q">What is a seeder?</div><div class="rf-a">Populates database with test/default data</div></div>
+    <div class="rf-item"><div class="rf-q">What is middleware?</div><div class="rf-a">Code that runs before/after HTTP request reaches controller</div></div>
+    <div class="rf-item"><div class="rf-q">What is a facade?</div><div class="rf-a">Static-like interface to Laravel services: Mail::, Auth::, DB::</div></div>
+    <div class="rf-item"><div class="rf-q">What is .env file?</div><div class="rf-a">Environment configuration — never commit to Git</div></div>
+    <div class="rf-item"><div class="rf-q">What is Razorpay order?</div><div class="rf-a">Created server-side before payment — has order_id</div></div>
+    <div class="rf-item"><div class="rf-q">Why amount in paise?</div><div class="rf-a">Avoid floating point issues — 1 INR = 100 paise</div></div>
+    <div class="rf-item"><div class="rf-q">What is HMAC?</div><div class="rf-a">Hash-based Message Authentication Code — for Razorpay signature</div></div>
+    <div class="rf-item"><div class="rf-q">What is $fillable?</div><div class="rf-a">Whitelist for mass assignment protection</div></div>
+    <div class="rf-item"><div class="rf-q">What is hasOne?</div><div class="rf-a">One-to-one relationship: User hasOne TrainerProfile</div></div>
+    <div class="rf-item"><div class="rf-q">What is hasMany?</div><div class="rf-a">One-to-many: TrainerProfile hasMany Bookings</div></div>
+    <div class="rf-item"><div class="rf-q">What is belongsTo?</div><div class="rf-a">Inverse of hasOne/hasMany — Booking belongsTo School</div></div>
+    <div class="rf-item"><div class="rf-q">What is primary key?</div><div class="rf-a">Unique identifier for each row — usually id (auto-increment)</div></div>
+    <div class="rf-item"><div class="rf-q">What is foreign key?</div><div class="rf-a">Column referencing primary key in another table</div></div>
+    <div class="rf-item"><div class="rf-q">1NF?</div><div class="rf-a">Atomic values — no repeating groups in columns</div></div>
+    <div class="rf-item"><div class="rf-q">INNER JOIN vs LEFT JOIN?</div><div class="rf-a">INNER: only matching rows. LEFT: all from left + matched from right</div></div>
+    <div class="rf-item"><div class="rf-q">GROUP BY purpose?</div><div class="rf-a">Groups rows for aggregate functions like COUNT, AVG</div></div>
+    <div class="rf-item"><div class="rf-q">WHERE vs HAVING?</div><div class="rf-a">WHERE: before grouping. HAVING: after GROUP BY</div></div>
+    <div class="rf-item"><div class="rf-q">What is INDEX?</div><div class="rf-a">Data structure for faster SELECT queries</div></div>
+    <div class="rf-item"><div class="rf-q">DELETE vs TRUNCATE?</div><div class="rf-a">DELETE: row by row, logged. TRUNCATE: all rows, faster</div></div>
+    <div class="rf-item"><div class="rf-q">What is ACID?</div><div class="rf-a">Atomicity, Consistency, Isolation, Durability</div></div>
+    <div class="rf-item"><div class="rf-q">What is Composer?</div><div class="rf-a">PHP dependency manager — manages packages</div></div>
+    <div class="rf-item"><div class="rf-q">What is Namespace?</div><div class="rf-a">Organizes PHP classes — prevents naming conflicts</div></div>
+    <div class="rf-item"><div class="rf-q">Interface vs Abstract?</div><div class="rf-a">Interface: only signatures, multiple impl. Abstract: has methods, single inherit</div></div>
+    <div class="rf-item"><div class="rf-q">What is Trait?</div><div class="rf-a">Reusable code blocks — use multiple in one class</div></div>
+    <div class="rf-item"><div class="rf-q">const vs static?</div><div class="rf-a">const: compile-time constant. static: runtime, can use late binding</div></div>
+    <div class="rf-item"><div class="rf-q">What is flexbox?</div><div class="rf-a">CSS 1D layout system — rows or columns</div></div>
+    <div class="rf-item"><div class="rf-q">let vs const vs var?</div><div class="rf-a">var: function scope. let: block scope, mutable. const: block scope, immutable</div></div>
+    <div class="rf-item"><div class="rf-q">What is DOM?</div><div class="rf-a">Document Object Model — HTML as JS-accessible tree</div></div>
+    <div class="rf-item"><div class="rf-q">HTTP 403 vs 401?</div><div class="rf-a">401: not authenticated. 403: authenticated but not authorized</div></div>
+    <div class="rf-item"><div class="rf-q">What is REST?</div><div class="rf-a">Architectural style using HTTP methods for APIs</div></div>
+    <div class="rf-item"><div class="rf-q">paginate() in Laravel?</div><div class="rf-a">Auto-splits results into pages with navigation links</div></div>
+    <div class="rf-item"><div class="rf-q">what is withQueryString()?</div><div class="rf-a">Preserves URL query params in pagination links</div></div>
+    <div class="rf-item"><div class="rf-q">Storage::link does what?</div><div class="rf-a">Creates symlink from public/storage to storage/app/public</div></div>
+    <div class="rf-item"><div class="rf-q">What is Auth::user()?</div><div class="rf-a">Returns currently logged-in user model</div></div>
+    <div class="rf-item"><div class="rf-q">route() vs url()?</div><div class="rf-a">route(): named route URL. url(): plain URL path</div></div>
+    <div class="rf-item"><div class="rf-q">abort(403) does?</div><div class="rf-a">Throws HTTP 403 response immediately</div></div>
+    <div class="rf-item"><div class="rf-q">What is with() in redirect?</div><div class="rf-a">Flashes data to session for one request</div></div>
+    <div class="rf-item"><div class="rf-q">old() in Blade?</div><div class="rf-a">Retrieves previous input after failed validation</div></div>
+    <div class="rf-item"><div class="rf-q">What is dd()?</div><div class="rf-a">Dump and Die — debug helper, dumps variable and stops</div></div>
+    <div class="rf-item"><div class="rf-q">APP_DEBUG=false means?</div><div class="rf-a">Hide error details from users in production</div></div>
+  </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ PART 15 ═══ -->
+<div class="part" id="p15">
+  <div class="part-header">
+    <span class="part-num">PART 15</span>
+    <span class="part-title">TOP 100 Questions — Priority Ranked</span>
+  </div>
+  <div class="part-body">
+
+  <div class="tip tip-green">🔥 = Must know perfectly | ⭐ = Know well | ✅ = Good to know</div>
+
+  <div style="margin-bottom:1rem;font-weight:600;color:var(--white);">🔥 Extremely Important — Know These Cold</div>
+
+  <div class="top-item"><span class="top-rank">01</span><span>What is TheSchoolTech and what problem does it solve? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">02</span><span>Explain the complete booking + payment flow <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">03</span><span>How does Razorpay signature verification work? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">04</span><span>What is role-based middleware and how is it implemented? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">05</span><span>What is Eloquent ORM? How do you use relationships? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">06</span><span>What is N+1 problem and how to solve it? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">07</span><span>Authentication vs Authorization — difference? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">08</span><span>What is $fillable and why important? Mass assignment? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">09</span><span>What is CSRF? How does Laravel prevent it? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">10</span><span>Explain your database structure and relationships <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">11</span><span>What is MVC architecture in Laravel? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">12</span><span>How does login work? What does Auth::attempt() do internally? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">13</span><span>What are 4 pillars of OOP with examples from your project? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">14</span><span>What is the difference between GET and POST? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">15</span><span>What happens if payment succeeds but DB update fails? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">16</span><span>INNER JOIN vs LEFT JOIN vs RIGHT JOIN with examples <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">17</span><span>Abstract class vs Interface — difference? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">18</span><span>How does file upload work and how is it secured? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">19</span><span>What is SQL injection? How to prevent it in Laravel? <span class="badge fire">🔥</span></span></div>
+  <div class="top-item"><span class="top-rank">20</span><span>What is Dependency Injection? Where used in project? <span class="badge fire">🔥</span></span></div>
+
+  <div style="margin:1rem 0;font-weight:600;color:var(--white);">⭐ Important — Know Well</div>
+
+  <div class="top-item"><span class="top-rank">21</span><span>What is Laravel Mailable? Explain email notification system <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">22</span><span>What is Laravel Scheduler? How auto-completion works? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">23</span><span>What are Accessors and Mutators? Give examples from project <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">24</span><span>What is the Service Container / IoC in Laravel? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">25</span><span>What is Route Model Binding? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">26</span><span>What is normalization? 1NF, 2NF, 3NF? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">27</span><span>What is ACID in transactions? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">28</span><span>What is a closure in PHP? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">29</span><span>What is Trait? Where used in TheSchoolTech? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">30</span><span>What is XSS? How does Blade prevent it? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">31</span><span>What is pagination? How does paginate() work? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">32</span><span>How would you scale TheSchoolTech for 100K users? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">33</span><span>What would you improve in TheSchoolTech? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">34</span><span>Why did you use JSON for teaching_subjects? Tradeoffs? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">35</span><span>What is Composer? What packages did you use? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">36</span><span>Let vs const vs var in JavaScript <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">37</span><span>What is REST API? HTTP methods? Status codes? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">38</span><span>Explain WHERE vs HAVING with example <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">39</span><span>What is include vs require in PHP? <span class="badge star">⭐</span></span></div>
+  <div class="top-item"><span class="top-rank">40</span><span>What is Blade @csrf, @section, @extends, @yield? <span class="badge star">⭐</span></span></div>
+
+  <div style="margin:1rem 0;font-weight:600;color:var(--white);">✅ Good to Know</div>
+
+  <div class="top-item"><span class="top-rank">41</span><span>What is Redis and how would you use it in this project? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">42</span><span>What is a Queue? How to use for emails? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">43</span><span>What is Webhook in context of Razorpay? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">44</span><span>What is Flexbox? How used in TheSchoolTech? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">45</span><span>What is responsive design? How Bootstrap helps? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">46</span><span>DELETE vs TRUNCATE vs DROP <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">47</span><span>What is PDO? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">48</span><span>What is an Index in database? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">49</span><span>What is UNION vs UNION ALL? <span class="badge good">✅</span></span></div>
+  <div class="top-item"><span class="top-rank">50</span><span>What is the CSS box model? <span class="badge good">✅</span></span></div>
+
+  <div style="margin-top:2rem;padding:1.2rem;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.25);border-radius:12px;">
+    <div style="font-weight:700;color:#fca5a5;margin-bottom:.8rem;">⚠️ Most Dangerous Follow-Up Questions (High Risk)</div>
+    <div style="font-size:.85rem;color:var(--muted);line-height:2;">
+      1. "How does bcrypt work internally?"<br>
+      2. "What happens inside Auth::attempt()?"<br>
+      3. "Why JSON for subjects — isn't that a design flaw?"<br>
+      4. "What if payment succeeds but server crashes?"<br>
+      5. "How would you implement Webhooks for Razorpay?"<br>
+      6. "What is late static binding?"<br>
+      7. "Explain the Laravel service container resolution"<br>
+      8. "How would you add real-time notifications?"
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;padding:1.2rem;background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.25);border-radius:12px;">
+    <div style="font-weight:700;color:#6ee7b7;margin-bottom:.8rem;">✅ Revise These 20 Topics First</div>
+    <div style="font-size:.85rem;color:var(--muted);line-height:2;">
+      1. Complete payment flow (Razorpay) | 2. Role middleware implementation |
+      3. Eloquent relationships + eager loading | 4. CSRF protection |
+      5. Database structure explanation | 6. MVC flow in Laravel |
+      7. Authentication flow | 8. OOP 4 pillars with project examples |
+      9. SQL JOINs | 10. Mass assignment + $fillable |
+      11. File upload security | 12. N+1 problem |
+      13. Laravel Mailable | 14. Laravel Scheduler |
+      15. Normalization | 16. ACID | 17. XSS prevention |
+      18. HTTP methods + status codes | 19. Route Model Binding |
+      20. What would you improve / scale?
+    </div>
+  </div>
+
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function toggle(el) {
+  const answer = el.nextElementSibling;
+  answer.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
+HTMLEOF
